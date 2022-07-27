@@ -1,0 +1,1 @@
+INSERT INTO clientes (id_doc, tipo_doc, nombre, nombre2, apellido, apellido2, telefono, direccion, cd_res) VALUES(23445322, 'c', 'Pedro', 'Isaí', 'Álvarez', 'Cuaquentzi', '5525055433', 'calle 123', 'CdMx');
