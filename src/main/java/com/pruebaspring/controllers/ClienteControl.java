@@ -18,37 +18,38 @@ import com.pruebaspring.models.service.IClienteService;
 public class ClienteControl {
 	@Autowired
 	private IClienteService clienteService;
-	
+
 	@GetMapping("/listar")
 	public List<Cliente> listar() {
 		return clienteService.findAll();
 	}
-	
+
 	@GetMapping("/buscar/{id}/{tipoDoc}")
-	public Cliente buscarCliente(@PathVariable Long id, @PathVariable String tipoDoc) throws DataNotNullException, ClientNotFoundException, DocumentTypeNotValidException{
-		if(id == null) {
+	public Cliente buscarCliente(@PathVariable Long id, @PathVariable String tipoDoc)
+			throws DataNotNullException, ClientNotFoundException, DocumentTypeNotValidException {
+		if (id == null) {
 			throw new DataNotNullException("Número de documento");
 		}
-		if(tipoDoc == null) {
+		if (tipoDoc == null) {
 			throw new DataNotNullException("Tipo de documento");
 		}
-		String tipoDocLower= tipoDoc.toLowerCase();
-		if(tipoDocLower.equals("p") || tipoDocLower.equals("c")) {
-			Cliente tmpCliente= clienteService.findCliente(id);
-			if(tmpCliente!=null) {
-				if(tipoDoc.equals(tmpCliente.getTipoDoc())) {
+		String tipoDocLower = tipoDoc.toLowerCase();
+		if (tipoDocLower.equals("p") || tipoDocLower.equals("c")) {
+			Cliente tmpCliente = clienteService.findCliente(id);
+			if (tmpCliente != null) {
+				if (tipoDoc.equals(tmpCliente.getTipoDoc())) {
 					return tmpCliente;
-				}else {
+				} else {
 					throw new ClientNotFoundException("Tipo de documento");
 				}
-			}else {
+			} else {
 				throw new ClientNotFoundException("Número de documento");
 			}
-		}else {
+		} else {
 			throw new DocumentTypeNotValidException();
 		}
 	}
-	
+
 	@GetMapping("/**")
 	public void badRequest() throws BadRequestException {
 		throw new BadRequestException();

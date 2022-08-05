@@ -38,5 +38,5 @@ public class ErrorMessage {
 		return String.format("ErrorMessage [codigo=%s, exception=%s, message=%s, path=%s]", status, exception, message,
 				path);
 	}
-	
+
 }

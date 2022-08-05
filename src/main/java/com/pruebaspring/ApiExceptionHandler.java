@@ -17,14 +17,15 @@ import com.pruebaspring.models.entity.ErrorMessage;
 @ControllerAdvice
 public class ApiExceptionHandler {
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-	@ExceptionHandler({ClientNotFoundException.class})
+	@ExceptionHandler({ ClientNotFoundException.class })
 	@ResponseBody
 	public ErrorMessage notFoundRequest(HttpServletRequest request, Exception exception) {
-		return new ErrorMessage(HttpStatus.NOT_FOUND.value(),exception, request.getRequestURI());
+		return new ErrorMessage(HttpStatus.NOT_FOUND.value(), exception, request.getRequestURI());
 	}
-	
+
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler({Exception.class, DataNotNullException.class, DocumentTypeNotValidException.class, NumberFormatException.class, BadRequestException.class})
+	@ExceptionHandler({ Exception.class, DataNotNullException.class, DocumentTypeNotValidException.class,
+			NumberFormatException.class, BadRequestException.class })
 	@ResponseBody
 	public ErrorMessage badRequest(Exception exception) {
 		return new ErrorMessage(HttpStatus.BAD_REQUEST.value(), exception, "");
